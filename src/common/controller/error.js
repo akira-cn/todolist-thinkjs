@@ -61,6 +61,13 @@ export default class extends think.controller.base {
     return this.displayError(404);
   }
   /**
+   * Method Not Allowed
+   * @return {Promise}      []
+   */
+  _405Action(){
+    return this.displayError(405);
+  }
+  /**
    * Internal Server Error
    * @return {Promise}      []
    */
