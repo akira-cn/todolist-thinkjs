@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.18)
 # Database: todolist
-# Generation Time: 2017-05-08 07:01:23 +0000
+# Generation Time: 2017-05-08 10:34:41 +0000
 # ************************************************************
 
 
@@ -29,11 +29,11 @@ CREATE TABLE `tdl_task` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL COMMENT '任务描述',
   `type` int(11) NOT NULL DEFAULT '0' COMMENT '0-待办，1-已办，2-删除',
-  `from_time` datetime DEFAULT NULL COMMENT '起始时间',
-  `to_time` datetime DEFAULT NULL COMMENT '结束时间',
-  `update_time` datetime DEFAULT NULL COMMENT '状态变更时间',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `uid` int(11) DEFAULT NULL COMMENT '用户ID',
+  `from_time` timestamp NULL DEFAULT NULL COMMENT '起始时间',
+  `to_time` timestamp NULL DEFAULT NULL COMMENT '结束时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '状态变更时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `uid` int(11) NOT NULL COMMENT '用户ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -49,14 +49,22 @@ CREATE TABLE `tdl_user` (
   `name` varchar(256) NOT NULL DEFAULT '' COMMENT '用户名称',
   `nickname` varchar(11) NOT NULL DEFAULT '' COMMENT '用户昵称',
   `gid` varchar(256) NOT NULL DEFAULT '' COMMENT '第三方社交帐号ID',
-  `type` int(11) NOT NULL COMMENT '登录类型 0-github',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `create_ip` varchar(256) NOT NULL DEFAULT '',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '登录类型 0-github',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '用户状态：0-正常，1-异常',
   `email` varchar(256) DEFAULT NULL COMMENT '用户邮箱',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `tdl_user` WRITE;
+/*!40000 ALTER TABLE `tdl_user` DISABLE KEYS */;
+
+INSERT INTO `tdl_user` (`id`, `name`, `nickname`, `gid`, `type`, `create_time`, `status`, `email`)
+VALUES
+	(1,'akira-cn','月影','github_316498',0,'2017-05-08 18:31:20',0,'akira.cn@gmail.com');
+
+/*!40000 ALTER TABLE `tdl_user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
