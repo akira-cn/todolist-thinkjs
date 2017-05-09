@@ -13,6 +13,10 @@ npm install
 npm start
 ```
 
+## Github Authority
+
+visit http://localhost:8360/
+
 ## Deploy with pm2
 
 Use pm2 to deploy app on production enviroment.

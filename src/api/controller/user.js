@@ -7,6 +7,11 @@ import Base from './base.js';
  * @type {Class}
  */
 export default class extends Base {
+  async logoutAction(){
+    await this.session('user', '');
+    return this.success();
+  }
+
   async indexAction(){
     let {type, state} = this.get();
 
