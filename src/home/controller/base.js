@@ -2,6 +2,7 @@
 
 export default class extends think.controller.base {
   async __before(){
+    //如果没有用户信息，跳转去登录
     let user = await this.session('user');
 
     if(!user){
