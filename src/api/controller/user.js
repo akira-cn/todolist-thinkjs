@@ -20,7 +20,7 @@ export default class extends Base {
   async indexAction(){
     let {type, state} = this.get();
 
-    if(type === 'github'){
+    if(type === 'github'){  
       //github 登录并获取用户信息
 
       let GithubService = this.service('auth/github');
@@ -51,6 +51,7 @@ export default class extends Base {
       
       //写入 session
       await this.session('user', userInfo);
+      console.log(userInfo);
 
       if(state){
         //有跳转 url，跳转

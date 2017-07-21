@@ -1,5 +1,5 @@
 import querystring from 'querystring';
-import request from 'request-promise';
+import request from 'request-promise';  //request-promise模块在thinkjs中未找到，是否改成request？
 
 const GITHUB_AUTH_URL = 'https://github.com/login/oauth';
 const GITHUB_API_URL = 'https://api.github.com';
@@ -25,9 +25,9 @@ export default class extends think.service.base {
   getAuthorizeUrl(state) {
     let params = querystring.stringify({
       client_id: this.client_id,
-      redirect_url: this.redirect_uri,
+      redirect_uri: this.redirect_uri,
       scope: this.scope,
-      state
+      state: state
     });
     return `${GITHUB_AUTH_URL}/authorize?${params}`;
   }
@@ -75,7 +75,7 @@ export default class extends think.service.base {
         json: true
       });      
     }catch(ex){
-      console.log(ex);
+      console.log(ex);  //检测try内部是否发生异常，发生异常则抛出错误
     }
   }
 

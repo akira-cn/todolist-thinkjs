@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `tdl_user`;
 CREATE TABLE `tdl_user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL DEFAULT '' COMMENT '用户名称',
-  `nickname` varchar(11) NOT NULL DEFAULT '' COMMENT '用户昵称',
+  `nickname` varchar(11) DEFAULT '' COMMENT '用户昵称',
   `gid` varchar(256) NOT NULL DEFAULT '' COMMENT '第三方社交帐号ID',
   `type` int(11) NOT NULL DEFAULT '0' COMMENT '登录类型 0-github',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',

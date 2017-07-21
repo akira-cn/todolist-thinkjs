@@ -50,6 +50,7 @@ export default class extends Rest {
    * 添加任务
    * 
    * @param  {String}  description 任务描述
+   * catch() 用于捕获错误信息
    */
   async postAction(){
     let {uid} = this._user;

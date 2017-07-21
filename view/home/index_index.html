@@ -2,44 +2,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>New ThinkJS Application</title>
+<title>todolist</title>
 <style>
 *{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
 a, a:visited{color:#337ab7;text-decoration: none;}
-header{padding: 70px 0 70px 0;background-color: #4A6495}
-h1{font-size: 36px;color:#fff;font-weight: normal;}
-code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-.content{width: 1000px;margin: auto}
+header{padding: 40px 0 30px 0;background-color: #4A6495}
+h1{font-size: 36px;color:#fff;font-weight: normal;display: inline-block;}
+#wrap_right{float: right;}
+#login_in, #sign_in{display: inline-block;color: #fff;font-size: 18px;}
+#login_in{margin-right: 0.8em;}
+form{margin-top: 1em; text-align: center;}
+input{line-height: 2em;border: 2px solid #fff;border-radius: 5px;width: 45%;font-size: 16px;padding-left: 5px;}
+input[name="addList"]:focus{border: 2px solid #fff;}
+#addBtn{line-height: 2em;border: 2px solid #fff;border-radius: 5px;font-size: 16px; width: 9%;text-align: center;background-color: #4A6495;color: #fff;padding-left: 0;}
+#addBtn:hover{background-color: rgba(255, 255, 255, 0.2);cursor: pointer;}
+code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+.content{width: 1000px;margin: auto;}
 .wrap{width: 1000px;margin: auto}
-.content{margin-top: 80px;}
-.list{width: 800px;}
-.list .item{position: relative;padding-left: 70px;margin-top: 50px;}
-.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
-.list .item h2{font-size: 24px;font-weight: normal;}
-.list .item p{line-height: 30px;margin-top: 10px}
+.content{margin-top: 36px;margin-bottom: 20px;}
+.list{float: left;width: 46%;padding: 0 16px; margin-bottom: 36px;}
+#list_doing{border-right: 3px solid #337ab7;border-radius: 5px;}
+#list_done{margin-left: 10px;}
+h2{font-size: 18px; color: #4A6495}
+.list .item{position: relative;padding:10px 0 10px 70px;margin-top: 20px;background-color: rgba(74, 100, 149, 0.18);border-radius: 10px;}
+.list .item .step{position: absolute;width: 28px;height: 28px;top:5px;left:6px;border: 3px solid rgba(74, 100, 149, 0.6);border-radius: 23px;text-align: center;line-height: 28px;}
+.list .item h3{font-size: 24px;font-weight: normal;}
+.list .item p{line-height: 30px;margin-top: 10px;}
 </style>
 </head>
 <body>
   <header>
     <div class="wrap">
-      <h1>A New App Created By ThinkJS</h1>
+      <h1>ToDoList</h1>
+      <div id="wrap_right">
+        <p id="login_in">登录</p>
+        <p id="sign_in">注册</p>
+      </div>
+      <form action="#" method="get">
+        <input type="text" name="addList" placeholder="添加任务" />
+        <input type="submit" name="add" id="addBtn" value="提交" />
+      </form>
     </div>
   </header>
   <div class="content">
-    <div class="list">
+    <div id="list_doing" class="list">
+      <h2>正在进行</h2>
       <div class="item">
         <div class="step">1</div>
-        <h2>Generate Files</h2>
+        <h3>Generate Files</h3>
         <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
       </div>
       <div class="item">
         <div class="step">2</div>
-        <h2>Documentation</h2>
+        <h3>Documentation</h3>
         <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
       </div>
       <div class="item">
         <div class="step">3</div>
-        <h2>WebSocket</h2>
+        <h3>WebSocket</h3>
+        <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
+      </div>
+    </div>
+    <div id="list_done" class="list">
+      <h2>已经完成</h2>
+      <div class="item">
+        <div class="step">1</div>
+        <h3>Generate Files</h3>
+        <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
+      </div>
+      <div class="item">
+        <div class="step">2</div>
+        <h3>Documentation</h3>
+        <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
+      </div>
+      <div class="item">
+        <div class="step">3</div>
+        <h3>WebSocket</h3>
         <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
       </div>
     </div>
