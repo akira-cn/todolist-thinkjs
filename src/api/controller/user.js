@@ -51,7 +51,7 @@ export default class extends Base {
       
       //写入 session
       await this.session('user', userInfo);
-      console.log(userInfo);
+      // console.log(userInfo);
 
       if(state){
         //有跳转 url，跳转

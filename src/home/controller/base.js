@@ -10,5 +10,8 @@ export default class extends think.controller.base {
     }else{
       this._user = user;
     }
+    // this.assign({'loginUrl': '/api/user?type=github&state=${this.http.url}'})
+    // this._user = user;
+
   }
 }

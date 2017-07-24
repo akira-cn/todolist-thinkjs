@@ -41,7 +41,6 @@ CREATE TABLE `tdl_task` (
 
 # Dump of table tdl_user
 # ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `tdl_user`;
 
 CREATE TABLE `tdl_user` (
