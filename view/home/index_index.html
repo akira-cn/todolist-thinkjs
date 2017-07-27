@@ -14,7 +14,7 @@ h1{font-size: 36px;color:#fff;font-weight: normal;display: inline-block;}
 /*#sign_in{display: inline-block;color: #fff;font-size: 18px;}*/
 /*.login_in li{display: none;}*/
 .login_in li:hover{background-color: rgba(255, 255, 255, 0.3);border: 1px solid rgba(255,255,255,0.1);border-radius: 5px;display: block;}
-#login_out{cursor: pointer;color: #fff;text-align: center;font-size: 15px;}
+#login_out{color: #fff;text-align: center;font-size: 15px;}
 /*.login_in:hover #login_out{display: block;}*/
 form{margin-top: 1em; text-align: center;}
 input{line-height: 2em;border: 2px solid #fff;border-radius: 5px;width: 45%;font-size: 16px;padding-left: 5px;}
@@ -34,6 +34,7 @@ h2{font-size: 18px; color: #4A6495}
 .list .item .deleteBtn{position: absolute;top: 42px;}
 .list .item h3{font-size: 24px;font-weight: normal;}
 .list .item p{line-height: 30px;margin-top: 10px;}
+#loginForIndex{color: #fff;}
 </style>
 </head>
 <body>
@@ -43,10 +44,10 @@ h2{font-size: 18px; color: #4A6495}
       <div id="wrap_right">
         <%if(loginedUser){%>
           <ul class="login_in"><%=loginedUser.name%>
-            <li><a href="#" id="login_out">退出</a></li>
+            <li><a href="/home/login/index" id="login_out">退出</a></li>
           </ul>   
         <%}else{%>
-          <a href="home/login/indexAction">登录</a>
+          <a href="/home/login/index" id="loginForIndex">登录</a>
         <%}%>
         <!-- <p id="sign_in">注册</p> -->
       </div>

@@ -25,6 +25,7 @@
         h2{color:#4A6495; font-size: 15px;display: inline-block;}
         .oauth{margin-top: 3em;margin-right: 1em;cursor: pointer; }
         img{margin-left: 0.6em;vertical-align: bottom;}
+        img:hover{border-radius: 100% 100%;background-color: rgba(74, 100, 149, 0.2);}
 		.signP{margin-top: 20px;}
     </style>
 </head>
@@ -35,7 +36,7 @@
 	        <h1>TodoList</h1>
 	    </div>
 	    <div class="login-body">
-	        <form method="post" action="#">
+	        <form method="post" action="index/index">
 	            <div class="form-group">
 	                <input id="userName" class="form-control" type="text" name="userName" placeholder="账户"  minlength="3" required="required"/>
 	            </div>
@@ -49,7 +50,7 @@
 	    </div>
 	    <div class="oauth">
 	    	<h2>github快速登录:</h2>
-	    	<a href="#"><img src="/static/img/githubBlue.png" alt="github登录" height="50px" width="50px" /></a><!--这里是跑去github授权页面的url-->
+	    	<a href="/home/login/githublogin"><img src="/static/img/githubBlue.png" alt="github登录" height="50px" width="50px" /></a><!--这里是跑去github授权页面的url-->
 	    	<p class="signP">没有账号？<a href="">免费注册</a></p>
 	    </div>
 	</div>

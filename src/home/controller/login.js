@@ -7,7 +7,13 @@ export default class extends Base {
    * login action
    * @return {Promise} []
    */
-  indexAction(){
+  async indexAction(){
+  	await this.session('user', '');
   	return this.display();
   }
+
+  githubloginAction(){
+      return this.redirect(`/api/user?type=github&state=${/home/index/index}`);
+    };
+
 }
