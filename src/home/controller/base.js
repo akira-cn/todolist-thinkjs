@@ -12,6 +12,9 @@ export default class extends think.controller.base {
     }
     // this.assign({'loginUrl': '/api/user?type=github&state=${this.http.url}'})
     // this._user = user;
+    
+    let task = await this.session('task');
+    console.log(task);
 
   }
 }

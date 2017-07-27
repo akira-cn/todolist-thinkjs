@@ -18,7 +18,7 @@ export default class extends Base {
    * @param  {String}  state 登录后跳转地址
    */
   async indexAction(){
-    let {type, state} = this.get();
+    let {type, state} = this.get();  //如何实现跳转？
 
     if(type === 'github'){  
       //github 登录并获取用户信息

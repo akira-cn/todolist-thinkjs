@@ -6,11 +6,16 @@
 <style>
 *{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
 a, a:visited{color:#337ab7;text-decoration: none;}
+li{list-style: none;text-decoration: none;}
 header{padding: 40px 0 30px 0;background-color: #4A6495}
 h1{font-size: 36px;color:#fff;font-weight: normal;display: inline-block;}
 #wrap_right{float: right;}
-.login_in{display: inline-block;color: #fff;font-size: 18px;margin-right: 0.8em;cursor: pointer;}
+.login_in{display: inline-block;color: #fff;font-size: 18px;margin-right: 0.8em;cursor: pointer;text-align: center;}
 /*#sign_in{display: inline-block;color: #fff;font-size: 18px;}*/
+/*.login_in li{display: none;}*/
+.login_in li:hover{background-color: rgba(255, 255, 255, 0.3);border: 1px solid rgba(255,255,255,0.1);border-radius: 5px;display: block;}
+#login_out{cursor: pointer;color: #fff;text-align: center;font-size: 15px;}
+/*.login_in:hover #login_out{display: block;}*/
 form{margin-top: 1em; text-align: center;}
 input{line-height: 2em;border: 2px solid #fff;border-radius: 5px;width: 45%;font-size: 16px;padding-left: 5px;}
 input[name="addList"]:focus{border: 2px solid #fff;}
@@ -24,8 +29,9 @@ code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;bo
 #list_doing{border-right: 3px solid #337ab7;border-radius: 5px;}
 #list_done{margin-left: 10px;}
 h2{font-size: 18px; color: #4A6495}
-.list .item{position: relative;padding:10px 0 10px 70px;margin-top: 20px;background-color: rgba(74, 100, 149, 0.18);border-radius: 10px;}
-.list .item .step{position: absolute;width: 28px;height: 28px;top:5px;left:6px;border: 3px solid rgba(74, 100, 149, 0.6);border-radius: 23px;text-align: center;line-height: 28px;}
+.list .item{position: relative;padding:1px 0 2px 50px;margin-top: 20px;background-color: rgba(74, 100, 149, 0.18);border-radius: 10px;}
+.list .item .step{position: absolute;width: 26px;height: 18px;top:14px;left:7px;border: 3px solid rgba(74, 100, 149, 0.6);border-radius: 23px;text-align: center;line-height: 18px;}
+.list .item .deleteBtn{position: absolute;top: 42px;}
 .list .item h3{font-size: 24px;font-weight: normal;}
 .list .item p{line-height: 30px;margin-top: 10px;}
 </style>
@@ -36,21 +42,17 @@ h2{font-size: 18px; color: #4A6495}
       <h1>ToDoList</h1>
       <div id="wrap_right">
         <%if(loginedUser){%>
-          <p class="login_in"><%=loginedUser.name%></p>
-          <!-- <ul>
-            <li>个人中心</li>
-            <li>注销</li>
-          </ul>  -->  
+          <ul class="login_in"><%=loginedUser.name%>
+            <li><a href="#" id="login_out">退出</a></li>
+          </ul>   
         <%}else{%>
-          <a href="#">登录</a>
+          <a href="home/login/indexAction">登录</a>
         <%}%>
-        
-        
         <!-- <p id="sign_in">注册</p> -->
       </div>
-      <form action="#" method="get">
+      <form action="api/task/postAction" method="post"><!--参数1/参数1的值-->
         <input type="text" name="addList" placeholder="添加任务" />
-        <input type="submit" name="add" id="addBtn" value="提交" />
+        <input type="submit" id="addBtn" value="提交" />
       </form>
     </div>
   </header>
@@ -58,43 +60,49 @@ h2{font-size: 18px; color: #4A6495}
     <div id="list_doing" class="list">
       <h2>正在进行</h2>
       <div class="item">
-        <div class="step">1</div>
-        <h3>Generate Files</h3>
+        <div class="step"></div>
+        <button class="step" class="deleteBtn"></button>
+        <!-- <h3>Generate Files</h3> -->
         <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
       </div>
       <div class="item">
-        <div class="step">2</div>
-        <h3>Documentation</h3>
+        <div class="step"></div>
+        <button class="step" class="deleteBtn"></button>
+        <!-- <h3>Documentation</h3> -->
         <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
       </div>
       <div class="item">
-        <div class="step">3</div>
-        <h3>WebSocket</h3>
+        <div class="step"></div>
+        <button class="step" class="deleteBtn"></button>
+        <!-- <h3>WebSocket</h3> -->
         <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
       </div>
     </div>
     <div id="list_done" class="list">
       <h2>已经完成</h2>
       <div class="item">
-        <div class="step">1</div>
-        <h3>Generate Files</h3>
+        <div class="step"></div>
+        <button class="step" class="deleteBtn"></button>
+        <!-- <h3>Generate Files</h3> -->
         <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
       </div>
       <div class="item">
-        <div class="step">2</div>
-        <h3>Documentation</h3>
+        <div class="step"></div>
+        <button class="step" class="deleteBtn"></button>
+        <!-- <h3>Documentation</h3> -->
         <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
       </div>
       <div class="item">
-        <div class="step">3</div>
-        <h3>WebSocket</h3>
+        <div class="step"></div>
+        <button class="step" class="deleteBtn"></button>
+        <!-- <h3>WebSocket</h3> -->
         <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
       </div>
     </div>
   </div>
 
 <script type="text/javascript">
-  // document.getElementById("login_in").innerHTML = this._user.name + '已登录';
+  
 </script>
 </body>
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<style>
+        html, body {margin: 0;padding: 0;height: 100%;width: 100%;font-family: 'Microsoft YaHei';}
+        a{text-decoration: none;color: #4A6495;}
+        p{font-size: 14px;}
+        /*
+        background: linear-gradient(to top left, #4A6495 , #337ab7);
+         #particle-js{
+            z-index: -1;
+        }*/
+        .login-all{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -67%);text-align: center;height: 320px;width: 280px;}
+        .login-body{margin-top: 3em;}
+        h1{color: #4A6495;font-family: 'Microsoft YaHei';}
+        /*.form-group{margin-bottom: 0.2em;}*/
+        input{height: 36px;font-size: 14px;line-height: 1.5;width: 100%;max-width: 272px;border: 1px solid #3f6ea5;padding-left: 5px;}
+        input[id=userName]{border-bottom: none;}
+
+        button{height: 39px;font-size: 14px;color: #fff;line-height: 1.5;vertical-align: middle;letter-spacing: 2em;text-indent: 2em;text-align: center;background-color: #4A6495;border: 1px solid #3f6ea5;max-width: 280px;margin-top: 1em;}
+        button[type=submit]{width: 100%;}
+        button:hover{background-color: rgba(74, 100, 149, 0.9);}
+        h2{color:#4A6495; font-size: 15px;display: inline-block;}
+        .oauth{margin-top: 3em;margin-right: 1em;cursor: pointer; }
+        img{margin-left: 0.6em;vertical-align: bottom;}
+		.signP{margin-top: 20px;}
+    </style>
+</head>
+<body>
+<div class="login-all">
+	<div class="login-box">
+	    <div class="login-header">
+	        <h1>TodoList</h1>
+	    </div>
+	    <div class="login-body">
+	        <form method="post" action="#">
+	            <div class="form-group">
+	                <input id="userName" class="form-control" type="text" name="userName" placeholder="账户"  minlength="3" required="required"/>
+	            </div>
+	            <div class="form-group">
+	                <input id="passWord" class="form-control" type="password" name="password" placeholder="密码"  minlength="3" required="required"/>
+	            </div>
+	            <div class="form-group">
+	                <button type="submit">登录</button>
+	            </div>
+	        </form>
+	    </div>
+	    <div class="oauth">
+	    	<h2>github快速登录:</h2>
+	    	<a href="#"><img src="/static/img/githubBlue.png" alt="github登录" height="50px" width="50px" /></a><!--这里是跑去github授权页面的url-->
+	    	<p class="signP">没有账号？<a href="">免费注册</a></p>
+	    </div>
+	</div>
+</div>
+	
+</body>
+</html>

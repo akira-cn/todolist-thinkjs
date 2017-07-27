@@ -8,7 +8,7 @@ import Rest from './rest.js';
  */
 export default class extends Rest {
   /**
-   * init
+   * init 
    * @param  {Object} http []
    * @return {}      []
    */
@@ -22,7 +22,7 @@ export default class extends Rest {
    */
   async getAction(){
     let {uid} = this._user;
-    let id = this.id;
+    let id = this.id;   //this.id咋调用？
 
     if(!id){
       let result = await this.modelInstance.where({
@@ -37,6 +37,9 @@ export default class extends Rest {
         id,
         type: {'<': 2}
       }).find();
+
+    // //将获取到的任务写入缓存
+    // await this.session('task', result);
 
       if(result.id){
         return this.success(result);
