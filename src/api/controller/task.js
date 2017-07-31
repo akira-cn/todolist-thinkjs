@@ -44,7 +44,7 @@ export default class extends Rest {
       if(result.id){
         return this.success(result);
       }else{
-        return this.fail(1404, 'task not found');
+        return this.fail(404, 'task not found');
       }
     }
   }

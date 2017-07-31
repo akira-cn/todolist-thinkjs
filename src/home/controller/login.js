@@ -13,7 +13,7 @@ export default class extends Base {
   }
 
   githubloginAction(){
-      return this.redirect(`/api/user?type=github&state=${/home/index/index}`);
-    };
+      return this.redirect(`/api/user?type=github&state=/home/index/index`);
+  }
 
 }
