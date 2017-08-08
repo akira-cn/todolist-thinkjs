@@ -1,62 +1,85 @@
-
-
-// function saveSort(){
-	
-// 	var doings=doinglist.getElementsByTagName("p");
-// 	var dones=donelist.getElementsByTagName("p");
-// 	var data=[];
-// 	for(i=0;i<doings.length; i++){
-// 		data.unshift(todo);
-// 	}
-// 	for(i=0;i<dones.length; i++){
-// 		var todo={"title":dones[i].innerHTML,"type":1};
-// 		data.unshift(todo);
-// 	}
-// 	saveData(data);
-// }
-// function saveData(data){
-// 	localStorage.setItem("todo",JSON.stringify(data));  //从一个对象中解析出字符串
-// }
-
-
-// function update(i,field,value){
-	
-// }
 var collection=[];
+var doneCol=[];
+var doingCol=[];
 /**
  * @function: load 实时添加任务
  * @primary： 获取到的添加的任务对象
  */
 function load(data){
-	
+	// if(data.type == 0){
+	// 	doingCol.push(data);  //doingCol记录待办task
+	// }
+	// if(data.type == 1){
+	// 	doneCol.push(data);   //doneCol记录已办task
+	// }
 	var doinglist=document.getElementById("taskDoing");
 	var donelist=document.getElementById("taskDone");
 	var doingcount=document.getElementById("doingCount");
 	var donecount=document.getElementById("doneCount");
+	doingcount.innerHTML=0;
+	doinglist.innerHTML="";
+	donecount.innerHTML=0;
+	donelist.innerHTML="";
 	collection.push(data);
 	if(collection!=null){
 		var doingCount=0;
 		var doneCount=0;
 		var doingString="";
 		var doneString="";
+		//<i class="fa fa-trash">  <i class="fa fa-trash">
 		for (var i = collection.length - 1; i >= 0; i--) {
 			if(collection[i].type){
-				doneString+="<li  draggable='true'><input type='checkbox' onchange='update("+i+",false)' checked='checked' />"
-				+"<p id='p-"+i+"' onclick='edit("+i+")'>"+collection[i].description+"</p>"
+				doneString+="<li  draggable='true'><input data-id="+collection[i].id+" data-type=" +collection[i].type+ " type='checkbox' checked='checked' class='listInput'/>"
+				+"<p id='p-"+i+"'>"+collection[i].description+"</p>"+"<button data-bid="+collection[i].id+"><i class='fa fa-trash'></i></button>"
 				+"</li>";
 				doneCount++;
+				doneCol.push(collection[i]);
 			}
 			else{
-				doingString+="<li  draggable='true'><input type='checkbox' onchange='update("+i+",\"type\",true)' />"
-				+"<p id='p-"+i+"' onclick='edit("+i+")'>"+collection[i].description+"</p>"
+				doingString+="<li  draggable='true'><input data-id="+collection[i].id+" data-type=" +collection[i].type+ " type='checkbox' class='listInput' />"
+				+"<p id='p-"+i+"'>"+collection[i].description+"</p>"+"<button data-bid="+collection[i].id+"><i class='fa fa-trash'></i></button>"
 				+"</li>";
 				doingCount++;
+				doingCol.push(collection[i]);
 			}
 		};
 		doingcount.innerHTML=doingCount;
 		doinglist.innerHTML=doingString;
 		donecount.innerHTML=doneCount;
 		donelist.innerHTML=doneString;
+
+		$('.listInput:last').change(function(){
+			// let sid = $(this).data('id');
+			// let stype = $(this).data('type');
+			let str = $.param({id:$(this).data('id'),type:$(this).data('type')});
+		    $.ajax({
+		        url: "/home/index/update",
+		        data: str,
+		        type: 'POST',
+		        success: function(){
+		        	$.get("api/task/get/id/116", function(arg){
+		              var data = arg.data;
+		              load(data);
+		            }); 
+		        }
+		    })
+		});
+
+		//delete
+  		$('button:last').click(function(){
+  			let str = $.param({id:$(this).data('bid')});
+  			$.ajax({
+  				url: "home/index/delete",
+  				data: str,
+  				type: 'POST',
+  				success: function(){
+  					$.get("api/task/get/id/117", function(arg){
+		              var data = arg.data;
+		              load(data);
+		            }); 
+  				}
+  			})
+ 		})
 	}
 	else{
 		doingcount.innerHTML=0;
@@ -64,43 +87,11 @@ function load(data){
 		donecount.innerHTML=0;
 		donelist.innerHTML="";
 	}
-
-	//checkbox
-
-// 	var lis=doinglist.querySelectorAll('ol li');
-// 	[].forEach.call(lis, function(li) {
-// 		li.addEventListener('dragstart', handleDragStart, false);
-// 		li.addEventListener('dragover', handleDragOver, false);
-// 		li.addEventListener('drop', handleDrop, false);
-
-// 		onmouseout =function(){
-// 			saveSort();
-// 		};
-// 	});	
 }
-/**
- * @function: 实现move的相关函数
- */
-// var dragSrcEl = null;
-// function handleDragStart(e) {
-//   dragSrcEl = this;
-//   e.dataTransfer.effectAllowed = 'move';
-//   e.dataTransfer.setData('text/html', this.innerHTML); //将this.innerHTML的值以'text/html'的数据类型赋给dataTransfer对象
-// }
-// function handleDragOver(e) {
-//   if (e.preventDefault) {
-//     e.preventDefault();
-//   }
-//   e.dataTransfer.dropEffect = 'move';   //设置拖放目标允许移动
-//   return false;
-// }
-// function handleDrop(e) {
-//   if (e.stopPropagation) {
-//     e.stopPropagation(); 
-//   }
-//   if (dragSrcEl != this) {
-//     dragSrcEl.innerHTML = this.innerHTML;
-//     this.innerHTML = e.dataTransfer.getData('text/html');  //从dataTransfer对象中获取之前存进去的值
-//   }
-//   return false;
-// }
+
+
+
+// $.get("api/task/get/id//", function(arg){
+// 	var data = arg.data;
+// 	load(data);
+// }); 
