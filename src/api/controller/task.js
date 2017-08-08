@@ -22,8 +22,8 @@ export default class extends Rest {
    */
   async getAction(){
     let {uid} = this._user;
-    let id = this.id;   //this.id咋调用？
-
+    let id = this.id; 
+    console.log(id);
     if(!id){
       let result = await this.modelInstance.where({
         uid,
@@ -38,13 +38,10 @@ export default class extends Rest {
         type: {'<': 2}
       }).find();
 
-    // //将获取到的任务写入缓存
-    // await this.session('task', result);
-
       if(result.id){
         return this.success(result);
       }else{
-        return this.fail(404, 'task not found');
+        return this.fail(1404, 'task not found');
       }
     }
   }
@@ -58,7 +55,6 @@ export default class extends Rest {
   async postAction(){
     let {uid} = this._user;
     let data = this.param();
-
     data.uid = uid;
 
     try{

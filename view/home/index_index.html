@@ -1,41 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>todolist</title>
-<style>
-*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
-a, a:visited{color:#337ab7;text-decoration: none;}
-li{list-style: none;text-decoration: none;}
-header{padding: 40px 0 30px 0;background-color: #4A6495}
-h1{font-size: 36px;color:#fff;font-weight: normal;display: inline-block;}
-#wrap_right{float: right;}
-.login_in{display: inline-block;color: #fff;font-size: 18px;margin-right: 0.8em;cursor: pointer;text-align: center;}
-/*#sign_in{display: inline-block;color: #fff;font-size: 18px;}*/
-/*.login_in li{display: none;}*/
-.login_in li:hover{background-color: rgba(255, 255, 255, 0.3);border: 1px solid rgba(255,255,255,0.1);border-radius: 5px;display: block;}
-#login_out{color: #fff;text-align: center;font-size: 15px;}
-/*.login_in:hover #login_out{display: block;}*/
-form{margin-top: 1em; text-align: center;}
-input{line-height: 2em;border: 2px solid #fff;border-radius: 5px;width: 45%;font-size: 16px;padding-left: 5px;}
-input[name="addList"]:focus{border: 2px solid #fff;}
-#addBtn{line-height: 2em;border: 2px solid #fff;border-radius: 5px;font-size: 16px; width: 9%;text-align: center;background-color: #4A6495;color: #fff;padding-left: 0;}
-#addBtn:hover{background-color: rgba(255, 255, 255, 0.2);cursor: pointer;}
-code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-.content{width: 1000px;margin: auto;}
-.wrap{width: 1000px;margin: auto}
-.content{margin-top: 36px;margin-bottom: 20px;}
-.list{float: left;width: 46%;padding: 0 16px; margin-bottom: 36px;}
-#list_doing{border-right: 3px solid #337ab7;border-radius: 5px;}
-#list_done{margin-left: 10px;}
-h2{font-size: 18px; color: #4A6495}
-.list .item{position: relative;padding:1px 0 2px 50px;margin-top: 20px;background-color: rgba(74, 100, 149, 0.18);border-radius: 10px;}
-.list .item .step{position: absolute;width: 26px;height: 18px;top:14px;left:7px;border: 3px solid rgba(74, 100, 149, 0.6);border-radius: 23px;text-align: center;line-height: 18px;}
-.list .item .deleteBtn{position: absolute;top: 42px;}
-.list .item h3{font-size: 24px;font-weight: normal;}
-.list .item p{line-height: 30px;margin-top: 10px;}
-#loginForIndex{color: #fff;}
-</style>
+<link rel="stylesheet" type="text/css" href="/static/index.css">
 </head>
 <body>
   <header>
@@ -51,59 +19,51 @@ h2{font-size: 18px; color: #4A6495}
         <%}%>
         <!-- <p id="sign_in">注册</p> -->
       </div>
-      <form action="/api/task/post" method="post"><!--参数1/参数1的值-->
-        <input type="text" name="addList" placeholder="添加任务" />
+      <form method="post" id="taskForm">
+        <input type="text" name="description" placeholder="添加任务" required="required" autocomplete="off"/>
         <input type="submit" id="addBtn" value="提交" />
       </form>
     </div>
   </header>
   <div class="content">
     <div id="list_doing" class="list">
-      <h2>正在进行</h2>
-      <div class="item">
-        <div class="step"></div>
-        <button class="step" class="deleteBtn"></button>
-        <!-- <h3>Generate Files</h3> -->
-        <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
-      </div>
-      <div class="item">
-        <div class="step"></div>
-        <button class="step" class="deleteBtn"></button>
-        <!-- <h3>Documentation</h3> -->
-        <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
-      </div>
-      <div class="item">
-        <div class="step"></div>
-        <button class="step" class="deleteBtn"></button>
-        <!-- <h3>WebSocket</h3> -->
-        <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
-      </div>
+      <h2>正在进行<span id="doingCount">0</span></h2>
+        <ol id="taskDoing"></ol>
     </div>
     <div id="list_done" class="list">
-      <h2>已经完成</h2>
-      <div class="item">
-        <div class="step"></div>
-        <button class="step" class="deleteBtn"></button>
-        <!-- <h3>Generate Files</h3> -->
-        <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
-      </div>
-      <div class="item">
-        <div class="step"></div>
-        <button class="step" class="deleteBtn"></button>
-        <!-- <h3>Documentation</h3> -->
-        <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
-      </div>
-      <div class="item">
-        <div class="step"></div>
-        <button class="step" class="deleteBtn"></button>
-        <!-- <h3>WebSocket</h3> -->
-        <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
-      </div>
+      <h2>已经完成<span id="doneCount">0</span></h2>
+        <ul id="taskDone"></ul>
     </div>
   </div>
-
+  <footer>
+      Copyright © 2017 todolist
+  </footer>
+<script type="text/javascript" src="/static/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/index.js"></script>
 <script type="text/javascript">
-  
+  $('#taskForm').submit(function (event){
+      event.preventDefault();  //阻止表单提交
+      $.ajax({
+        url: "/api/task/post/id",
+        type: "POST",
+        dataType: "json",
+        data: $('#taskForm').serialize(),
+        success: function(res){
+          if(!res.errno){
+            $.get("api/task/get/id/"+res.data.id, function(arg){
+              var data = arg.data;
+              load(data);
+            }); 
+            // load(data);
+            // $.get("api/task/get/id/"+res.data.id, function(arg){
+              // console.log(arg);
+              // $('#taskDoing').html(arg.data.description);
+            // });
+          }
+        }
+      });
+   });
+ 
 </script>
 </body>
 </html>
