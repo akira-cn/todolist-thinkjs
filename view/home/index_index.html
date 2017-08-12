@@ -21,7 +21,7 @@
         <!-- <p id="sign_in">注册</p> -->
       </div>
       <form method="post" id="taskForm">
-        <input type="text" name="description" placeholder="添加任务" required="required" autocomplete="off"/>
+        <input type="text" name="description" placeholder="添加任务" required="required" autocomplete="off" id="textAddTask" />
         <input type="submit" id="addBtn" value="提交" />
       </form>
     </div>
@@ -42,6 +42,12 @@
 <script type="text/javascript" src="/static/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/static/index.js"></script>
 <script type="text/javascript">
+
+//一开始获取全部该用户的全部信息
+  $.get("api/task/get/id", function(arg){
+      var data = arg.data;
+      load(data);
+  });
 //add
   $('#taskForm').submit(function (event){
       event.preventDefault();  //阻止表单提交
@@ -52,15 +58,14 @@
         data: $('#taskForm').serialize(),
         success: function(res){
           if(!res.errno){
-            $.get("api/task/get/id/"+res.data.id, function(arg){
+            $('#textAddTask').val('');
+            $.get("api/task/get/id", function(arg){
               var data = arg.data;
               load(data);
             }); 
-            // load(data);
-            // $.get("api/task/get/id/"+res.data.id, function(arg){
-              // console.log(arg);
-              // $('#taskDoing').html(arg.data.description);
-            // });
+          }
+          else{
+            alert('表单提交未成功，请重新填写');
           }
         }
       });

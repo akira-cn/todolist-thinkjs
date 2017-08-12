@@ -22,14 +22,14 @@ export default class extends Base {
     let type = parseInt(this.post('type')),id=parseInt(this.post('id'));
     let model = this.model('task');
     let affectedRows;
-    console.log(type,id);
+    // console.log(type,id);
     if(type == 0){
       affectedRows = await model.where({id: id}).update({type: 1});
     };
     if(type == 1){
       affectedRows = await model.where({id: id}).update({type: 0});
     };
-    console.log(affectedRows);
+    // console.log(affectedRows);
     if(affectedRows){
       return this.success(affectedRows);
     }else{
@@ -43,7 +43,7 @@ export default class extends Base {
  */
   async deleteAction(){
     let id=parseInt(this.post('id'));
-    console.log(id);
+    // console.log(id);
     let model = this.model('task');
     let affectedRows = await model.where({id: id}).delete();
     if(affectedRows){

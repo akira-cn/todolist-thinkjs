@@ -16,21 +16,6 @@ export default class extends Rest {
     super.init(http);
   }
 
-/**
- * 删除指定id的数据
- * @param  id
- */
-  // async deleteAction(){
-  //   let id=parseInt(this.post.id);
-  //   let model = this.model('task');
-  //   let affectedRows = await model.where({id: id}).delete();
-  //   if(affectedRows){
-  //     return this.success(affectedRows);
-  //   }else{
-  //     return this.fail(1406, '未选中删除项');
-  //   };
-  // }
-
   /**
    * 获取任务
    * @param {id} 如果传 id ，获取当前任务，否则获取当前用户任务列表
@@ -38,7 +23,8 @@ export default class extends Rest {
   async getAction(){
     let {uid} = this._user;
     let id = this.id; 
-    if(!id){
+    // console.log(id);
+    if(id ==='id'){
       let result = await this.modelInstance.where({
         uid,
         type: {'<': 2}
